@@ -1,4 +1,5 @@
-﻿namespace Roblox.UI
+﻿
+namespace Roblox.UI
 
 {
 	public partial class Chat : Panel
@@ -15,6 +16,7 @@
 
 			Canvas = Add.Panel( "chat_canvas" );
 			Canvas.PreferScrollToBottom = true;
+			Canvas.TryScrollToBottom();
 
 			Input = Add.TextEntry( "" );
 			Input.AddEventListener( "onsubmit", () => Submit() );
@@ -23,7 +25,14 @@
 			Input.AllowEmojiReplace = true;
 			Input.Placeholder = "To chat click here or press \"enter\" key";
 
-			Sandbox.Hooks.ChatHook.OnOpenChat += Open;
+			Sandbox.Hooks.Chat.OnOpenChat += Open;
+		}
+
+		public override void OnHotloaded()
+		{
+			base.OnHotloaded();
+
+			Canvas.TryScrollToBottom();
 		}
 
 		void Open()
@@ -38,20 +47,20 @@
 			Input.Blur();
 		}
 
-		void Submit()
+
+		private void Submit()
 		{
 			Close();
 
 			var msg = Input.Text.Trim();
 			Input.Text = "";
 
-			if ( string.IsNullOrWhiteSpace( msg ) )
-				return;
+			if ( string.IsNullOrWhiteSpace( msg ) ) return;
 
-			Say( msg );
+			SendChat( msg );
 		}
 
-		public virtual void AddEntry( string name, string message, string lobbyState = null )
+		public virtual void AddEntry( string name, string message )
 		{
 			var e = Canvas.AddChild<ChatEntry>();
 
@@ -59,24 +68,20 @@
 			e.NameLabel.Text = $"[{name}]:";
 
 			e.SetClass( "noname", string.IsNullOrEmpty( name ) );
-
-			if ( lobbyState == "ready" || lobbyState == "staging" )
-			{
-				e.SetClass( "is-lobby", true );
-			}
 		}
 
+		[ConCmd.Server]
+		public static void SendChat( string message )
+		{
+			if ( !ConsoleSystem.Caller.IsValid() ) return;
+
+			AddChat( To.Everyone, ConsoleSystem.Caller.Name, message );
+		}
 
 		[ConCmd.Client( "chat_add", CanBeCalledFromServer = true )]
-		public static void AddChatEntry( string name, string message, string lobbyState = null )
+		public static void AddChat( string name, string message )
 		{
-			Current?.AddEntry( name, message, lobbyState );
-
-			// Only log clientside if we're not the listen server host
-			if ( !Global.IsListenServer )
-			{
-				Log.Info( $"{name}: {message}" );
-			}
+			Current?.AddEntry( name, message );
 		}
 
 		[ConCmd.Client( "chat_addinfo", CanBeCalledFromServer = true )]
@@ -84,33 +89,5 @@
 		{
 			Current?.AddEntry( null, message );
 		}
-
-		[ConCmd.Server( "say" )]
-		public static void Say( string message )
-		{
-			Assert.NotNull( ConsoleSystem.Caller );
-
-			// todo - reject more stuff
-			if ( message.Contains( '\n' ) || message.Contains( '\r' ) )
-				return;
-
-			Log.Info( $"{ConsoleSystem.Caller}: {message}" );
-			AddChatEntry( To.Everyone, ConsoleSystem.Caller.Name, message );
-		}
-	}
-}
-
-namespace Sandbox.Hooks
-{
-	public static partial class ChatHook
-	{
-		public static event Action OnOpenChat;
-
-		[ConCmd.Client( "openchat" )]
-		internal static void MessageMode()
-		{
-			OnOpenChat?.Invoke();
-		}
-
 	}
 }

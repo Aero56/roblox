@@ -1,7 +1,4 @@
-﻿using Sandbox.UI.Construct;
-
-
-namespace Roblox.UI
+﻿namespace Roblox.UI
 {
 	public partial class ChatEntry : Panel
 	{
