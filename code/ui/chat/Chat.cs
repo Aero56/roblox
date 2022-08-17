@@ -78,13 +78,13 @@ namespace Roblox.UI
 			AddChat( To.Everyone, ConsoleSystem.Caller.Name, message );
 		}
 
-		[ConCmd.Client( "chat_add", CanBeCalledFromServer = true )]
+		[ConCmd.Client( "sbox_chat_add", CanBeCalledFromServer = true )]
 		public static void AddChat( string name, string message )
 		{
 			Current?.AddEntry( name, message );
 		}
 
-		[ConCmd.Client( "chat_addinfo", CanBeCalledFromServer = true )]
+		[ConCmd.Client( "sbox_chat_addinfo", CanBeCalledFromServer = true )]
 		public static void AddInformation( string message )
 		{
 			Current?.AddEntry( null, message );
