@@ -1,0 +1,102 @@
+﻿chat
+{
+	position: absolute;
+	top: 50px;
+	left: 5px;
+	z-index: 100;
+	flex-direction: column;
+	width: 500px;
+	height: 300px;
+	font-family: Helvetica;
+	font-weight: 600;
+
+	textentry
+	{
+		margin-top: 3px;
+		background-color: black;
+		opacity: 0;
+		color: rgba( black, 0.7 );
+		padding: 5px;
+		border: 7px solid rgba( black, 0.7 );
+		background-color: rgba( #ebebeb, 0.1 );
+		font-size: 15px;
+		flex-shrink: 0;
+		flex-grow: 0;
+		width: 100%;
+		transition: all 0.2s ease-out 3s;
+	}
+
+	textentry:not(.has-placeholder) .placeholder {
+		display: none;
+	}
+
+	.chat_canvas
+	{
+		flex-direction: column;
+		align-items: flex-start;
+		height: 300px;
+		overflow: scroll;
+		padding: 8px;
+		background-color: rgba( black, 0 );
+		transition: all 0.2s ease-out 3s;
+	}
+
+	&.open, &:hover
+	{
+		pointer-events: auto;
+
+		.chat_canvas
+		{
+			transition: all 0.2s ease-out 0s;
+			background-color: rgba( black, 0.7 );
+		}
+		
+		textentry
+		{
+			transition: all 0.2s ease-out 0s;
+			opacity: 1;
+		}
+	}
+}
+
+chatentry
+{
+	color: white;
+	transition: all 0.1s ease-out;
+	opacity: 1;
+	max-height: 200px;
+	flex-shrink: 0;
+	flex-grow: 0;
+	max-width: 100%;
+	transform: scale( 1 );
+	text-shadow: -1px -1px 0 rgba( black, 0.3 ), 1px -1px 0 rgba( black, 0.3 ), -1px 1px 0 rgba( black, 0.3 ), 1px 1px 0 rgba( black, 0.3 );
+
+	.name
+	{
+		padding-right: 4px;
+		font-weight: 600;
+		font-size: 15px;
+		color: #CDCDCD;
+		flex-shrink: 0;
+	}
+
+	.message
+	{
+		color: #fff;
+		font-size: 15px;
+		flex-grow: 1;
+	}
+
+	&.noname .name
+	{
+		display: none;
+	}
+
+	&.is-lobby
+	{
+		.name
+		{
+			color: #ff80f5;
+		}
+	}
+}

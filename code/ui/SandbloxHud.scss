@@ -1,0 +1,138 @@
+Health
+{
+	position: absolute;
+	right: 80px;
+	top: 22px;
+	border-radius: 10px;
+	border: 1px solid #000;
+	width: 100px;
+
+	.healthbar {
+		height: 5px;
+		background-color: #1BFC6B;
+		border-radius: 10px;
+	}
+
+	&.hide {
+		display: none;
+	}
+}
+
+MenuButton
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	right: 20px;
+	top: 6px;
+	border-radius: 10px;
+	width: 40px;
+	height: 40px;
+	background-color: rgba( #000, 0.7 );
+	pointer-events: auto;
+	cursor: pointer;
+
+	.circle {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 25px;
+		height: 25px;
+		border-radius: 100%;
+		border: 1px solid white;
+	}
+
+	.dot {
+		width: 3px;
+		height: 3px;
+		margin: 1px;
+		border-radius: 100%;
+		background-color: white;
+	}
+}
+
+rootpanel
+{
+	background-color: rgba( #333, 0 );
+	transition: background-color 0.2s ease-in;
+	pointer-events: visible;
+
+
+	&.devcamera
+	{
+		display: none;
+	}
+
+	&.draggingcamera
+	{
+		pointer-events: none;
+	}
+}
+
+
+InventoryBar
+{
+	position: absolute;
+	width: 100%;
+	bottom: 6px;
+	justify-content: center;
+	align-items: flex-end;
+	pointer-events: auto;
+}
+
+InventoryIcon
+{
+	display: flex;
+	width: 60px;
+	height: 60px;
+	margin: 0px 3px;
+	font-family: Calibri;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba( #000, 0.7 );
+	pointer-events: auto;
+	cursor: pointer;
+
+	.item-name
+	{
+		padding: 5px;
+		color: white;
+		font-size: 13px;
+		opacity: 0.7;
+		mix-blend-mode: lighten;
+		text-align: center;
+	}
+
+	.slot-number
+	{
+		font-size: 13px;
+		color: white;
+		position: absolute;
+		left: 1;
+		top: -2;
+	}
+
+	.border
+	{
+		position: absolute;
+		width: 60px;
+		height: 60px;
+		border: 6.1px solid #5A8EE9;
+
+		&.hide
+		{
+			display: none;
+		}
+	}
+
+	&.active
+	{
+		border: 6px solid #5A8EE9;
+	}
+
+	&.hide
+	{
+		display: none;
+	}
+}

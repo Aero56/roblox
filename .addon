@@ -1,0 +1,34 @@
+{
+  "Title": "S\u0026blox",
+  "Type": "game",
+  "Org": "aero",
+  "Ident": "sblox",
+  "Schema": 1,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "ResourcePaths": null,
+  "HasCode": true,
+  "CodePath": "/code/",
+  "RootNamespace": "Roblox",
+  "Metadata": {
+    "MaxPlayers": 128,
+    "MinPlayers": 0,
+    "GameNetworkType": "Multiplayer",
+    "MapSelect": "Unrestricted",
+    "MapList": [
+      "aero.roblox_baseplate"
+    ],
+    "RankType": "Best",
+    "PerMapRanking": false,
+    "LeaderboardType": "Descending",
+    "Compiler": {
+      "RootNamespace": "Roblox",
+      "DefineConstants": "SANDBOX;ADDON;DEBUG",
+      "NoWarn": "1701;1702;1591;"
+    },
+    "GameCategory": "Sandbox",
+    "ControlModes": {
+      "Keyboard": true
+    }
+  }
+}
