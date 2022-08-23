@@ -9,6 +9,7 @@
 	height: 300px;
 	font-family: Helvetica;
 	font-weight: 600;
+	pointer-events: all;
 
 	textentry
 	{
@@ -43,7 +44,6 @@
 
 	&.open, &:hover
 	{
-		pointer-events: auto;
 
 		.chat_canvas
 		{
@@ -56,6 +56,10 @@
 			transition: all 0.2s ease-out 0s;
 			opacity: 1;
 		}
+	}
+
+	&.draggingcamera {
+		pointer-events: none;
 	}
 }
 

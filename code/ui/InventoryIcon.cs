@@ -25,4 +25,11 @@ public class InventoryIcon : Panel
 		SetClass( "active", false );
 		SetClass( "hide", true);
 	}
+
+	public override void Tick()
+	{
+		base.Tick();
+
+		SetClass( "draggingcamera", Input.Down( InputButton.SecondaryAttack ) );
+	}
 }

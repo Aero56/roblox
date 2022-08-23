@@ -55,7 +55,12 @@
 		min-width: 30%;
 		max-height: 300px;
 		overflow: scroll;
-		pointer-events: auto;
+		pointer-events: all;
+		cursor: pointer;
+
+		&.draggingcamera {
+			pointer-events: none;
+		}
 
 		.entry
 		{
@@ -64,7 +69,6 @@
 			flex-shrink: 0;
 			padding-top: 10px;
 			padding-bottom: 10px;
-			cursor: pointer;
 			padding-left: 16px;
 			padding-right: 16px;
 

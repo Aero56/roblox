@@ -30,8 +30,12 @@ MenuButton
 	width: 40px;
 	height: 40px;
 	background-color: rgba( #000, 0.7 );
-	pointer-events: auto;
+	pointer-events: all;
 	cursor: pointer;
+
+	&.draggingcamera {
+		pointer-events: none;
+	}
 
 	.circle {
 		display: flex;
@@ -56,17 +60,12 @@ rootpanel
 {
 	background-color: rgba( #333, 0 );
 	transition: background-color 0.2s ease-in;
-	pointer-events: visible;
+	pointer-events: none;
 
 
 	&.devcamera
 	{
 		display: none;
-	}
-
-	&.draggingcamera
-	{
-		pointer-events: none;
 	}
 }
 
@@ -78,7 +77,6 @@ InventoryBar
 	bottom: 6px;
 	justify-content: center;
 	align-items: flex-end;
-	pointer-events: auto;
 }
 
 InventoryIcon
@@ -91,8 +89,12 @@ InventoryIcon
 	justify-content: center;
 	align-items: center;
 	background-color: rgba( #000, 0.7 );
-	pointer-events: auto;
+	pointer-events: all;
 	cursor: pointer;
+
+	&.draggingcamera {
+		pointer-events: none;
+	}
 
 	.item-name
 	{

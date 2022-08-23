@@ -25,6 +25,7 @@
 			
 			if ( Input.Pressed( InputButton.Score ) ) IsOpen = !IsOpen;
 			SetClass( "open", IsOpen );
+			Canvas.SetClass( "draggingcamera", Input.Down( InputButton.SecondaryAttack ) );
 
 			if ( !IsVisible )
 				return;

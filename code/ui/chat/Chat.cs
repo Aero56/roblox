@@ -28,6 +28,13 @@ namespace Roblox.UI
 			Sandbox.Hooks.Chat.OnOpenChat += Open;
 		}
 
+		public override void Tick()
+		{
+			base.Tick();
+
+			SetClass( "draggingcamera", Sandbox.Input.Down( InputButton.SecondaryAttack ) );
+		}
+
 		public override void OnHotloaded()
 		{
 			base.OnHotloaded();

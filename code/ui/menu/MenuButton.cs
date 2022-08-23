@@ -15,11 +15,11 @@ public class MenuButton : Panel
         // cba making an svg
         AddEventListener("onclick", () => Leaderboard<LeaderboardEntry>.IsOpen = !Leaderboard<LeaderboardEntry>.IsOpen);
 	}
-    
+
     public override void Tick()
 	{
 		base.Tick();
 
-		Parent.SetClass( "draggingcamera", Input.Down( InputButton.SecondaryAttack ) );
+		SetClass( "draggingcamera", Input.Down( InputButton.SecondaryAttack ) );
 	}
 }
