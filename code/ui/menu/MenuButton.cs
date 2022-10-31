@@ -13,7 +13,7 @@ public class MenuButton : Panel
         Circle.Add.Panel("dot");
         Circle.Add.Panel("dot");
         // cba making an svg
-        AddEventListener("onclick", () => Leaderboard<LeaderboardEntry>.IsOpen = !Leaderboard<LeaderboardEntry>.IsOpen);
+        AddEventListener("onclick", () => Leaderboard<UI.LeaderboardEntry>.IsOpen = !Leaderboard<UI.LeaderboardEntry>.IsOpen);
 	}
 
     public override void Tick()

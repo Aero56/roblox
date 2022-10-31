@@ -14,7 +14,7 @@ public partial class SandbloxHud : HudEntity<RootPanel>
 
 		RootPanel.AddChild<Chat>();
 		RootPanel.AddChild<VoiceList>();
-		RootPanel.AddChild<Leaderboard<LeaderboardEntry>>();
+		RootPanel.AddChild<Leaderboard<UI.LeaderboardEntry>>();
 		RootPanel.AddChild<MenuButton>();
 		RootPanel.AddChild<Health>();
 		RootPanel.AddChild<InventoryBar>();
