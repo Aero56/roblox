@@ -63,12 +63,13 @@ partial class SbuxShooter : Weapon
 
     public static async void UpdateLeaderboard( Client cl )
 	{
-		var leaderboard = await GameServices.Leaderboard.Query( "aero.sblox" );
-		var playerScore = leaderboard.Entries.Find( entry => entry.PlayerId == cl.PlayerId ).Rating;
+		var leaderboard = await Leaderboard.FindOrCreate( "Sandbux", false );
+        var playerScore = await leaderboard.Value.GetScore( cl.PlayerId );
+        var sbuxCount = cl.GetInt( "sbux" );
 
-        if(cl.GetInt( "sbux" ) > playerScore)
+        if(sbuxCount > playerScore.Value.Score)
         {
-            await GameServices.SubmitScore( cl.PlayerId, cl.GetInt( "sbux" ) );
+            await leaderboard.Value.Submit( cl, sbuxCount );
         }
 	}
 }

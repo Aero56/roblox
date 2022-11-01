@@ -2,8 +2,6 @@
 
 partial class PlayerCharacter : Player
 {
-	private TimeSince timeSinceDropped;
-
 	private DamageInfo lastDamage;
 
 	/// <summary>
@@ -73,7 +71,7 @@ partial class PlayerCharacter : Player
 
 		PlaySound( "oof" );
 
-		BecomeRagdollOnClient( Velocity, lastDamage.Flags, lastDamage.Position, lastDamage.Force, GetHitboxBone( lastDamage.HitboxIndex ) );
+		BecomeRagdollOnClient( Velocity, lastDamage.Flags, lastDamage.Position, lastDamage.Force, lastDamage.BoneIndex );
 
 		Controller = null;
 
@@ -91,7 +89,7 @@ partial class PlayerCharacter : Player
 
 	public override void TakeDamage( DamageInfo info )
 	{
-		if ( GetHitboxGroup( info.HitboxIndex ) == 1 )
+		if ( info.Hitbox.HasTag( "head" ) )
 		{
 			info.Damage *= 10.0f;
 		}
@@ -175,8 +173,6 @@ partial class PlayerCharacter : Player
 
 	public override void StartTouch( Entity other )
 	{
-		if ( timeSinceDropped < 1 ) return;
-
 		base.StartTouch( other );
 	}
 

@@ -6,7 +6,8 @@ namespace Roblox.UI
 	{
 		static Chat Current;
 		public static Panel Canvas { get; protected set; }
-		public TextEntry Input { get; protected set; }
+		public TextEntry ChatInput { get; protected set; }
+		public bool IsChatOpen { get; protected set; } = false;
 
 		public Chat()
 		{
@@ -18,21 +19,24 @@ namespace Roblox.UI
 			Canvas.PreferScrollToBottom = true;
 			Canvas.TryScrollToBottom();
 
-			Input = Add.TextEntry( "" );
-			Input.AddEventListener( "onsubmit", () => Submit() );
-			Input.AddEventListener( "onblur", () => Close() );
-			Input.AcceptsFocus = true;
-			Input.AllowEmojiReplace = true;
-			Input.Placeholder = "To chat click here or press \"enter\" key";
-
-			Sandbox.Hooks.Chat.OnOpenChat += Open;
+			ChatInput = Add.TextEntry( "" );
+			ChatInput.AddEventListener( "onsubmit", () => Submit() );
+			ChatInput.AddEventListener( "onblur", () => Close() );
+			ChatInput.AcceptsFocus = true;
+			ChatInput.AllowEmojiReplace = true;
+			ChatInput.Placeholder = "To chat click here or press \"enter\" key";
 		}
 
 		public override void Tick()
 		{
 			base.Tick();
 
-			SetClass( "draggingcamera", Sandbox.Input.Down( InputButton.SecondaryAttack ) );
+			SetClass( "draggingcamera", Input.Down( InputButton.SecondaryAttack ) );
+
+			if ( Input.Pressed( InputButton.Chat ) )
+			{
+				Open();
+			}
 		}
 
 		public override void OnHotloaded()
@@ -45,13 +49,13 @@ namespace Roblox.UI
 		void Open()
 		{
 			AddClass( "open" );
-			Input.Focus();
+			ChatInput.Focus();
 		}
 
 		void Close()
 		{
 			RemoveClass( "open" );
-			Input.Blur();
+			ChatInput.Blur();
 		}
 
 
@@ -59,8 +63,8 @@ namespace Roblox.UI
 		{
 			Close();
 
-			var msg = Input.Text.Trim();
-			Input.Text = "";
+			var msg = ChatInput.Text.Trim();
+			ChatInput.Text = "";
 
 			if ( string.IsNullOrWhiteSpace( msg ) ) return;
 

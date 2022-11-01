@@ -120,11 +120,11 @@ public partial class Game : Sandbox.Game
 		if ( owner == null )
 			return;
 
-		var entityType = TypeLibrary.GetTypeByName<Entity>( entName );
+		var entityType = TypeLibrary.GetDescription<Entity>( entName )?.TargetType;
 		if ( entityType == null )
 
-			if ( !TypeLibrary.Has<SpawnableAttribute>( entityType ) )
-				return;
+		if ( !TypeLibrary.Has<SpawnableAttribute>( entityType ) )
+			return;
 
 		var tr = Trace.Ray( owner.EyePosition, owner.EyePosition + owner.EyeRotation.Forward * 200 )
 			.UseHitboxes()

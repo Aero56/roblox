@@ -3,6 +3,7 @@
   "Type": "game",
   "Org": "aero",
   "Ident": "sblox",
+  "Tags": "",
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
@@ -29,6 +30,7 @@
     "GameCategory": "Sandbox",
     "ControlModes": {
       "Keyboard": true
-    }
+    },
+    "ParentPackage": ""
   }
 }
