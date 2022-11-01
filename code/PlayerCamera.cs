@@ -130,7 +130,7 @@ public partial class PlayerCamera : CameraMode
 			OrbitAngles = OrbitAngles.Normal;
 		}
 
-		if ( !IsSpectator && pawn.IsValid() && (input.Down(InputButton.Forward) || input.Down(InputButton.Back) || input.Down(InputButton.Left) || input.Down(InputButton.Right)) )
+		if ( !IsSpectator && pawn.IsValid() && (input.Down( InputButton.Forward ) || input.Down( InputButton.Back ) || input.Down( InputButton.Left ) || input.Down( InputButton.Right )) )
 		{
 			input.ViewAngles = OrbitAngles.WithPitch( 0f ) + input.AnalogMove.EulerAngles.WithPitch( 0f );
 		}

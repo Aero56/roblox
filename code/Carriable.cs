@@ -4,7 +4,8 @@ public partial class Carriable : BaseCarriable, IUse
 {
 	public override void CreateViewModel()
 	{
-		if(PlayerCamera.IsFirstPerson) {
+		if ( PlayerCamera.IsFirstPerson )
+		{
 			Host.AssertClient();
 
 			if ( string.IsNullOrEmpty( ViewModelPath ) )

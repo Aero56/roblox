@@ -30,7 +30,8 @@ partial class Flashlight : Weapon
 
 	public override void CreateViewModel()
 	{
-		if(PlayerCamera.IsFirstPerson) {
+		if ( PlayerCamera.IsFirstPerson )
+		{
 			base.CreateViewModel();
 
 			viewLight = CreateLight();

@@ -12,12 +12,12 @@
 			Message = Add.Label( "Message", "message" );
 		}
 
-		public override void Tick() 
+		public override void Tick()
 		{
 			base.Tick();
 
-			if ( Chat.Canvas.ChildrenCount > MessageLimit ) 
-			{ 
+			if ( Chat.Canvas.ChildrenCount > MessageLimit )
+			{
 				Chat.Canvas.Children.First().Delete();
 			}
 		}

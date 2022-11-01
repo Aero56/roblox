@@ -179,7 +179,7 @@ partial class PlayerCharacter : Player
 	[ConCmd.Server( "inventory_current" )]
 	public static void SetInventoryCurrent( string entName )
 	{
-		if (ConsoleSystem.Caller.Pawn is Player target == false) return;
+		if ( ConsoleSystem.Caller.Pawn is Player target == false ) return;
 
 		var inventory = target.Inventory;
 		if ( inventory == null )

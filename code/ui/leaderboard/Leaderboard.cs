@@ -4,7 +4,7 @@
 	public partial class Leaderboard<T> : Panel where T : LeaderboardEntry, new()
 	{
 		public Panel Canvas { get; protected set; }
-		readonly Dictionary<Client, T> Rows = new ();
+		readonly Dictionary<Client, T> Rows = new();
 
 		public Panel Header { get; protected set; }
 		public static bool IsOpen { get; set; } = true;
@@ -22,7 +22,7 @@
 		public override void Tick()
 		{
 			base.Tick();
-			
+
 			if ( Input.Pressed( InputButton.Score ) ) IsOpen = !IsOpen;
 			SetClass( "open", IsOpen );
 			Canvas.SetClass( "draggingcamera", Input.Down( InputButton.SecondaryAttack ) );
@@ -41,7 +41,7 @@
 
 			foreach ( var client in Rows.Keys.Except( Client.All ) )
 			{
-				if ( Rows.TryGetValue( client, out var row ))
+				if ( Rows.TryGetValue( client, out var row ) )
 				{
 					row?.Delete();
 					Rows.Remove( client );
@@ -50,7 +50,7 @@
 		}
 
 
-		protected virtual void AddHeader() 
+		protected virtual void AddHeader()
 		{
 			Header = Add.Panel( "header" );
 			Header.Add.Label( "Players", "players" );

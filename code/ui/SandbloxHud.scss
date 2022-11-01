@@ -1,5 +1,4 @@
-Health
-{
+Health {
 	position: absolute;
 	right: 80px;
 	top: 22px;
@@ -18,8 +17,7 @@ Health
 	}
 }
 
-MenuButton
-{
+MenuButton {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -29,7 +27,7 @@ MenuButton
 	border-radius: 10px;
 	width: 40px;
 	height: 40px;
-	background-color: rgba( #000, 0.7 );
+	background-color: rgba(#000, 0.7);
 	pointer-events: all;
 	cursor: pointer;
 
@@ -56,22 +54,19 @@ MenuButton
 	}
 }
 
-rootpanel
-{
-	background-color: rgba( #333, 0 );
+rootpanel {
+	background-color: rgba(#333, 0);
 	transition: background-color 0.2s ease-in;
 	pointer-events: none;
 
 
-	&.devcamera
-	{
+	&.devcamera {
 		display: none;
 	}
 }
 
 
-InventoryBar
-{
+InventoryBar {
 	position: absolute;
 	width: 100%;
 	bottom: 6px;
@@ -79,8 +74,7 @@ InventoryBar
 	align-items: flex-end;
 }
 
-InventoryIcon
-{
+InventoryIcon {
 	display: flex;
 	width: 60px;
 	height: 60px;
@@ -88,7 +82,7 @@ InventoryIcon
 	font-family: Calibri;
 	justify-content: center;
 	align-items: center;
-	background-color: rgba( #000, 0.7 );
+	background-color: rgba(#000, 0.7);
 	pointer-events: all;
 	cursor: pointer;
 
@@ -96,8 +90,7 @@ InventoryIcon
 		pointer-events: none;
 	}
 
-	.item-name
-	{
+	.item-name {
 		padding: 5px;
 		color: white;
 		font-size: 13px;
@@ -106,8 +99,7 @@ InventoryIcon
 		text-align: center;
 	}
 
-	.slot-number
-	{
+	.slot-number {
 		font-size: 13px;
 		color: white;
 		position: absolute;
@@ -115,26 +107,22 @@ InventoryIcon
 		top: -2;
 	}
 
-	.border
-	{
+	.border {
 		position: absolute;
 		width: 60px;
 		height: 60px;
 		border: 6.1px solid #5A8EE9;
 
-		&.hide
-		{
+		&.hide {
 			display: none;
 		}
 	}
 
-	&.active
-	{
+	&.active {
 		border: 6px solid #5A8EE9;
 	}
 
-	&.hide
-	{
+	&.hide {
 		display: none;
 	}
 }

@@ -81,7 +81,8 @@ public partial class Weapon : BaseWeapon, IUse
 
 	public override void CreateViewModel()
 	{
-		if(PlayerCamera.IsFirstPerson) {
+		if ( PlayerCamera.IsFirstPerson )
+		{
 			Host.AssertClient();
 
 			if ( string.IsNullOrEmpty( ViewModelPath ) )

@@ -28,7 +28,7 @@ public partial class Game : Sandbox.Game
 		var player = new PlayerCharacter( cl );
 		player.Respawn();
 
-		Chat.AddInformation( To.Single(cl), "Chat '/?' or '/help' for a list of chat commands." );
+		Chat.AddInformation( To.Single( cl ), "Chat '/?' or '/help' for a list of chat commands." );
 
 		cl.Pawn = player;
 	}
@@ -115,7 +115,7 @@ public partial class Game : Sandbox.Game
 	[ConCmd.Server( "spawn_entity" )]
 	public static void SpawnEntity( string entName )
 	{
-		if (ConsoleSystem.Caller.Pawn is Player owner == false) return;
+		if ( ConsoleSystem.Caller.Pawn is Player owner == false ) return;
 
 		if ( owner == null )
 			return;
@@ -123,8 +123,8 @@ public partial class Game : Sandbox.Game
 		var entityType = TypeLibrary.GetDescription<Entity>( entName )?.TargetType;
 		if ( entityType == null )
 
-		if ( !TypeLibrary.Has<SpawnableAttribute>( entityType ) )
-			return;
+			if ( !TypeLibrary.Has<SpawnableAttribute>( entityType ) )
+				return;
 
 		var tr = Trace.Ray( owner.EyePosition, owner.EyePosition + owner.EyeRotation.Forward * 200 )
 			.UseHitboxes()

@@ -4,19 +4,19 @@ namespace Roblox;
 
 public class MenuButton : Panel
 {
-    public Panel Circle;
-    public Panel Dots;
+	public Panel Circle;
+	public Panel Dots;
 	public MenuButton()
 	{
-        Circle = Add.Panel( "circle" );
-        Circle.Add.Panel("dot");
-        Circle.Add.Panel("dot");
-        Circle.Add.Panel("dot");
-        // cba making an svg
-        AddEventListener("onclick", () => Leaderboard<UI.LeaderboardEntry>.IsOpen = !Leaderboard<UI.LeaderboardEntry>.IsOpen);
+		Circle = Add.Panel( "circle" );
+		Circle.Add.Panel( "dot" );
+		Circle.Add.Panel( "dot" );
+		Circle.Add.Panel( "dot" );
+		// cba making an svg
+		AddEventListener( "onclick", () => Leaderboard<UI.LeaderboardEntry>.IsOpen = !Leaderboard<UI.LeaderboardEntry>.IsOpen );
 	}
 
-    public override void Tick()
+	public override void Tick()
 	{
 		base.Tick();
 

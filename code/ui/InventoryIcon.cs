@@ -13,7 +13,7 @@ public class InventoryIcon : Panel
 		Label = Add.Label( "empty", "item-name" );
 		Number = Add.Label( $"{i}", "slot-number" );
 		Border = Add.Panel( "border" );
-		AddEventListener( "onclick", () => 
+		AddEventListener( "onclick", () =>
 		{
 			InventoryBar.SelectedSlot = i - 1;
 		} );
@@ -23,7 +23,7 @@ public class InventoryIcon : Panel
 	{
 		Label.Text = "";
 		SetClass( "active", false );
-		SetClass( "hide", true);
+		SetClass( "hide", true );
 	}
 
 	public override void Tick()

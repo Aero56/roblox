@@ -19,7 +19,7 @@ public class InventoryBar : Panel
 	{
 		base.Tick();
 
-		if (Local.Pawn is Player player == false) return;
+		if ( Local.Pawn is Player player == false ) return;
 		if ( player == null ) return;
 		if ( player.Inventory == null ) return;
 
@@ -44,13 +44,13 @@ public class InventoryBar : Panel
 		inventoryIcon.TargetEnt = ent;
 		inventoryIcon.Label.Text = di.Name;
 		inventoryIcon.Border.SetClass( "hide", player.ActiveChild != ent );
-		inventoryIcon.SetClass( "hide", false);
+		inventoryIcon.SetClass( "hide", false );
 	}
 
 	[Event( "buildinput" )]
 	public static void ProcessClientInput( InputBuilder input )
 	{
-		if (Local.Pawn is Player player == false) return;
+		if ( Local.Pawn is Player player == false ) return;
 		if ( player == null )
 			return;
 
@@ -68,13 +68,13 @@ public class InventoryBar : Panel
 		if ( input.Pressed( InputButton.Slot8 ) ) SelectedSlot = 7;
 		if ( input.Pressed( InputButton.Slot9 ) ) SelectedSlot = 8;
 
-		if(LastSelectedSlot != SelectedSlot) 
-			SetActiveSlot(input, inventory, SelectedSlot);
+		if ( LastSelectedSlot != SelectedSlot )
+			SetActiveSlot( input, inventory, SelectedSlot );
 	}
 
 	public static void SetActiveSlot( InputBuilder input, IBaseInventory inventory, int i )
 	{
-		if (Local.Pawn is Player player == false) return;
+		if ( Local.Pawn is Player player == false ) return;
 
 		if ( player == null )
 			return;
@@ -82,7 +82,7 @@ public class InventoryBar : Panel
 		var ent = inventory.GetSlot( i );
 		if ( ent == null )
 			return;
-			
+
 		SelectedSlot = LastSelectedSlot = i;
 		input.ActiveChild = ent;
 	}
