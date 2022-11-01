@@ -155,4 +155,22 @@ public partial class Game : Sandbox.Game
 		Map.Reset( DefaultCleanupFilter );
 	}
 
+	public virtual async void SubmitScore( string bucket, Client client, int score )
+	{
+
+		var leaderboard = await Leaderboard.FindOrCreate( bucket, false );
+
+		await leaderboard.Value.Submit( client, score );
+
+	}
+
+	public virtual async Task<Sandbox.LeaderboardEntry?> GetScore( string bucket, Client client )
+	{
+
+		var leaderboard = await Leaderboard.FindOrCreate( bucket, false );
+
+		return await leaderboard.Value.GetScore( client.PlayerId );
+
+	}
+
 }

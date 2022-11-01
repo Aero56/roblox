@@ -1,9 +1,10 @@
-using Roblox;
+namespace Roblox;
 
 [Spawnable]
 [Library( "tool_boxgun", Title = "S&bux Shooter", Description = "Shoot s&bux", Group = "fun" )]
 partial class SbuxShooter : Weapon
 {
+
 	TimeSince timeSinceShoot;
 
 	string modelToShoot = "models/robux/robux.vmdl";
@@ -64,13 +65,12 @@ partial class SbuxShooter : Weapon
 
 	public static async void UpdateLeaderboard( Client cl )
 	{
-		var leaderboard = await Leaderboard.FindOrCreate( "Sandbux", false );
-		var playerScore = await leaderboard.Value.GetScore( cl.PlayerId );
+		var playerScore = await Game.Current.GetScore( "Sandbux", cl );
 		var sbuxCount = cl.GetInt( "sbux" );
 
 		if ( sbuxCount > playerScore.Value.Score )
 		{
-			await leaderboard.Value.Submit( cl, sbuxCount );
+			Game.Current.SubmitScore( "Sandbux", cl, sbuxCount );
 		}
 	}
 }

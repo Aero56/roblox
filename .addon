@@ -31,6 +31,10 @@
     "ControlModes": {
       "Keyboard": true
     },
-    "ParentPackage": ""
+    "ParentPackage": "",
+    "DefaultLeaderboards": [
+      "Sandbux",
+      "Kills"
+    ]
   }
 }
