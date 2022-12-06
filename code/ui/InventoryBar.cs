@@ -48,7 +48,7 @@ public class InventoryBar : Panel
 	}
 
 	[Event( "buildinput" )]
-	public static void ProcessClientInput( InputBuilder input )
+	public static void ProcessClientInput()
 	{
 		if ( Local.Pawn is Player player == false ) return;
 		if ( player == null )
@@ -58,32 +58,32 @@ public class InventoryBar : Panel
 		if ( inventory == null )
 			return;
 
-		if ( input.Pressed( InputButton.Slot1 ) ) SelectedSlot = 0;
-		if ( input.Pressed( InputButton.Slot2 ) ) SelectedSlot = 1;
-		if ( input.Pressed( InputButton.Slot3 ) ) SelectedSlot = 2;
-		if ( input.Pressed( InputButton.Slot4 ) ) SelectedSlot = 3;
-		if ( input.Pressed( InputButton.Slot5 ) ) SelectedSlot = 4;
-		if ( input.Pressed( InputButton.Slot6 ) ) SelectedSlot = 5;
-		if ( input.Pressed( InputButton.Slot7 ) ) SelectedSlot = 6;
-		if ( input.Pressed( InputButton.Slot8 ) ) SelectedSlot = 7;
-		if ( input.Pressed( InputButton.Slot9 ) ) SelectedSlot = 8;
+		if ( Input.Pressed( InputButton.Slot1 ) ) SelectedSlot = 0;
+		if ( Input.Pressed( InputButton.Slot2 ) ) SelectedSlot = 1;
+		if ( Input.Pressed( InputButton.Slot3 ) ) SelectedSlot = 2;
+		if ( Input.Pressed( InputButton.Slot4 ) ) SelectedSlot = 3;
+		if ( Input.Pressed( InputButton.Slot5 ) ) SelectedSlot = 4;
+		if ( Input.Pressed( InputButton.Slot6 ) ) SelectedSlot = 5;
+		if ( Input.Pressed( InputButton.Slot7 ) ) SelectedSlot = 6;
+		if ( Input.Pressed( InputButton.Slot8 ) ) SelectedSlot = 7;
+		if ( Input.Pressed( InputButton.Slot9 ) ) SelectedSlot = 8;
 
 		if ( LastSelectedSlot != SelectedSlot )
-			SetActiveSlot( input, inventory, SelectedSlot );
+			SetActiveSlot( inventory, SelectedSlot );
 	}
 
-	public static void SetActiveSlot( InputBuilder input, IBaseInventory inventory, int i )
+	public static void SetActiveSlot( IBaseInventory inventory, int i )
 	{
-		if ( Local.Pawn is Player player == false ) return;
-
-		if ( player == null )
+		if ( Local.Pawn is not Player player )
 			return;
 
 		var ent = inventory.GetSlot( i );
+		if ( player.ActiveChild == ent )
+			return;
+
 		if ( ent == null )
 			return;
 
-		SelectedSlot = LastSelectedSlot = i;
-		input.ActiveChild = ent;
+		player.ActiveChildInput = ent;
 	}
 }

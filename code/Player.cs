@@ -1,6 +1,6 @@
 ﻿namespace Roblox;
 
-partial class PlayerCharacter : Player
+public partial class PlayerCharacter : Player
 {
 
 	private DamageInfo lastDamage;
@@ -9,6 +9,11 @@ partial class PlayerCharacter : Player
 	/// The clothing container is what dresses the citizen
 	/// </summary>
 	public ClothingContainer Clothing = new();
+
+	[ClientInput] public new Vector3 InputDirection { get; set; }
+	[ClientInput] public new Angles ViewAngles { get; set; }
+	[ClientInput] public Vector3 CursorDirection { get; set; }
+	[ClientInput] public Vector3 CursorOrigin { get; set; }
 
 	/// <summary>
 	/// Default init
@@ -50,20 +55,20 @@ partial class PlayerCharacter : Player
 		base.Respawn();
 	}
 
-	public override void BuildInput( InputBuilder input )
+	public override void BuildInput()
 	{
 
-		if ( input.StopProcessing ) return;
+		if ( Input.StopProcessing ) return;
 
-		ActiveChild?.BuildInput( input );
+		ActiveChild?.BuildInput();
 
-		if ( input.StopProcessing ) return;
+		if ( Input.StopProcessing ) return;
 
-		Controller?.BuildInput( input );
+		Controller?.BuildInput();
 
-		if ( input.StopProcessing ) return;
+		if ( Input.StopProcessing ) return;
 
-		Animator?.BuildInput( input );
+		Animator?.BuildInput();
 	}
 
 	public override void OnKilled()
@@ -119,11 +124,6 @@ partial class PlayerCharacter : Player
 	{
 		base.Simulate( cl );
 
-		if ( Input.ActiveChild != null )
-		{
-			ActiveChild = Input.ActiveChild;
-		}
-
 		if ( LifeState != LifeState.Alive )
 			return;
 
@@ -146,7 +146,17 @@ partial class PlayerCharacter : Player
 
 		// where should we be rotated to
 		var turnSpeed = 0.02f;
-		var idealRotation = Rotation.LookAt( Input.Rotation.Forward.WithZ( 0 ), Vector3.Up );
+
+		Rotation rotation;
+
+		// If we're a bot, spin us around 180 degrees.
+		if ( Client.IsBot )
+			rotation = ViewAngles.WithYaw( ViewAngles.yaw + 180f ).ToRotation();
+		else
+			rotation = ViewAngles.ToRotation();
+
+		var idealRotation = Rotation.LookAt( rotation.Forward.WithZ( 0 ), Vector3.Up );
+
 		Rotation = Rotation.Slerp( Rotation, idealRotation, controller.WishVelocity.Length * Time.Delta * turnSpeed );
 		Rotation = Rotation.Clamp( idealRotation, 90.0f, out var shuffle ); // lock facing to within 45 degrees of look direction
 
@@ -155,7 +165,7 @@ partial class PlayerCharacter : Player
 		animHelper.WithWishVelocity( controller.WishVelocity );
 		animHelper.WithVelocity( controller.Velocity );
 		animHelper.WithLookAt( EyePosition + EyeRotation.Forward * 100.0f, 1.0f, 1.0f, 0.5f );
-		animHelper.AimAngle = Input.Rotation;
+		animHelper.AimAngle = rotation;
 		animHelper.FootShuffle = shuffle;
 		animHelper.IsGrounded = GroundEntity != null;
 		animHelper.IsSitting = controller.HasTag( "sitting" );

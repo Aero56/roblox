@@ -63,14 +63,10 @@ partial class SbuxShooter : Weapon
 		Client?.AddInt( "sbux", 1 );
 	}
 
-	public static async void UpdateLeaderboard( Client cl )
+	public static void UpdateLeaderboard( Client cl )
 	{
-		var playerScore = await Game.Current.GetScore( "Sandbux", cl );
 		var sbuxCount = cl.GetInt( "sbux" );
+		Game.Current.SubmitScore( "Sandbux", cl, sbuxCount );
 
-		if ( sbuxCount > playerScore.Value.Score )
-		{
-			Game.Current.SubmitScore( "Sandbux", cl, sbuxCount );
-		}
 	}
 }

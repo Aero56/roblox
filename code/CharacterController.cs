@@ -77,7 +77,8 @@ public partial class CharacterController : BasePlayerController
 	{
 		base.FrameSimulate();
 
-		EyeRotation = Input.Rotation;
+		var player = Pawn as PlayerCharacter;
+		EyeRotation = player.ViewAngles.ToRotation();
 	}
 
 	public override void Simulate()
@@ -86,7 +87,9 @@ public partial class CharacterController : BasePlayerController
 		UpdateBBox();
 
 		EyeLocalPosition += TraceOffset;
-		EyeRotation = Input.Rotation;
+
+		var player = Pawn as PlayerCharacter;
+		EyeRotation = player.ViewAngles.ToRotation();
 
 		RestoreGroundPos();
 
@@ -166,7 +169,7 @@ public partial class CharacterController : BasePlayerController
 		// Work out wish velocity.. just take input, rotate it to view, clamp to -1, 1
 		//
 
-		WishVelocity = new Vector3( Input.Forward, Input.Left, 0 );
+		WishVelocity = player.InputDirection;
 		var inSpeed = WishVelocity.Length.Clamp( 0, 1 );
 		// @TODO: Do this properly
 		//WishVelocity *= Input.Rotation.Angles().WithPitch( 0 ).ToRotation();
@@ -493,8 +496,8 @@ public partial class CharacterController : BasePlayerController
 
 	public virtual void CheckLadder()
 	{
-		var wishvel = new Vector3( Input.Forward, Input.Left, 0 );
-		wishvel *= Input.Rotation.Angles().WithPitch( 0 ).ToRotation();
+		var wishvel = new Vector3( Input.AnalogMove.x, Input.AnalogMove.y, 0 );
+		wishvel *= Rotation.Angles().WithPitch( 0 ).ToRotation();
 		wishvel = wishvel.Normal;
 
 		if ( IsTouchingLadder )

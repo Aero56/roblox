@@ -160,8 +160,9 @@ public partial class Game : Sandbox.Game
 
 		var leaderboard = await Leaderboard.FindOrCreate( bucket, false );
 
-		await leaderboard.Value.Submit( client, score );
-
+		if( leaderboard != null & leaderboard.Value.CanSubmit ) {
+			await leaderboard.Value.Submit( client, score );
+		}
 	}
 
 	public virtual async Task<Sandbox.LeaderboardEntry?> GetScore( string bucket, Client client )
