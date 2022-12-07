@@ -99,12 +99,13 @@ partial class Flashlight : Weapon
 
 	private bool MeleeAttack()
 	{
-		var forward = Owner.EyeRotation.Forward;
+		var ray = Owner.AimRay;
+		var forward = ray.Forward;
 		forward = forward.Normal;
 
 		bool hit = false;
 
-		foreach ( var tr in TraceBullet( Owner.EyePosition, Owner.EyePosition + forward * 80, 20.0f ) )
+		foreach ( var tr in TraceBullet( ray.Position, ray.Position + forward * 80, 20.0f ) )
 		{
 			if ( !tr.Entity.IsValid() ) continue;
 

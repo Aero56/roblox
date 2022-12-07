@@ -50,8 +50,6 @@ public partial class PlayerCharacter : Player
 		Inventory.Add( new Pistol() );
 		Inventory.Add( new SbuxShooter() );
 
-		CameraMode = new PlayerCamera();
-
 		base.Respawn();
 	}
 
@@ -66,9 +64,6 @@ public partial class PlayerCharacter : Player
 
 		Controller?.BuildInput();
 
-		if ( Input.StopProcessing ) return;
-
-		Animator?.BuildInput();
 	}
 
 	public override void OnKilled()

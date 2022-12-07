@@ -10,9 +10,9 @@ using Roblox.UI;
 
 namespace Roblox;
 
-public partial class Game : Sandbox.Game
+public partial class Game : GameManager
 {
-	public static new Game Current => Sandbox.Game.Current as Game;
+	public static new Game Current => Current as Game;
 
 	public Game()
 	{
@@ -50,7 +50,7 @@ public partial class Game : Sandbox.Game
 	[ConCmd.Server( "spawn" )]
 	public static async Task Spawn( string modelname )
 	{
-		var owner = ConsoleSystem.Caller?.Pawn;
+		var owner = ConsoleSystem.Caller?.Pawn as Player;
 
 		if ( ConsoleSystem.Caller == null )
 			return;
@@ -170,7 +170,7 @@ public partial class Game : Sandbox.Game
 
 		var leaderboard = await Leaderboard.FindOrCreate( bucket, false );
 
-		return await leaderboard.Value.GetScore( client.PlayerId );
+		return await leaderboard.Value.GetScore( client.SteamId );
 
 	}
 

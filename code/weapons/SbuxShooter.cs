@@ -22,7 +22,8 @@ partial class SbuxShooter : Weapon
 		{
 			if ( Input.Pressed( InputButton.Reload ) )
 			{
-				var tr = Trace.Ray( Owner.EyePosition, Owner.EyePosition + Owner.EyeRotation.Forward * 4000 ).Ignore( Owner ).Run();
+				var ray = Owner.AimRay;
+				var tr = Trace.Ray( ray.Position, ray.Position + ray.Forward * 4000 ).Ignore( Owner ).Run();
 
 				if ( tr.Entity is ModelEntity ent && !string.IsNullOrEmpty( ent.GetModelName() ) )
 				{
@@ -51,14 +52,16 @@ partial class SbuxShooter : Weapon
 
 	void Shoot()
 	{
+		var ray = Owner.AimRay;
+		
 		var ent = new Prop
 		{
-			Position = Owner.EyePosition + Owner.EyeRotation.Forward * 50,
-			Rotation = Rotation.From( new Angles( 90f, Owner.EyeRotation.Yaw(), 0f ) )
+			Position = ray.Position + ray.Forward * 50,
+			Rotation = Rotation.From( new Angles( 90f, ray.Position.y, 0f ) )
 		};
 
 		ent.SetModel( modelToShoot );
-		ent.Velocity = Owner.EyeRotation.Forward * new Random().Next( 500, 1000 );
+		ent.Velocity = ray.Forward * new Random().Next( 500, 1000 );
 
 		Client?.AddInt( "sbux", 1 );
 	}
