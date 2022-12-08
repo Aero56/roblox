@@ -15,6 +15,8 @@ public partial class PlayerCharacter : Player
 	[ClientInput] public Vector3 CursorDirection { get; set; }
 	[ClientInput] public Vector3 CursorOrigin { get; set; }
 
+	PlayerCamera PlayerCamera = new PlayerCamera();
+
 	/// <summary>
 	/// Default init
 	/// </summary>
@@ -113,6 +115,13 @@ public partial class PlayerCharacter : Player
 		if ( DevController != null ) return DevController;
 
 		return base.GetActiveController();
+	}
+
+	public override void FrameSimulate( Client cl )
+	{
+		base.FrameSimulate( cl );
+
+		PlayerCamera.Update();
 	}
 
 	public override void Simulate( Client cl )

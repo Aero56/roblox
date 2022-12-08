@@ -1,7 +1,12 @@
 namespace Roblox;
 
-public partial class PlayerCamera : CameraMode
+public partial class PlayerCamera
 {
+
+	public Vector3 Position { get; set; }
+	public Rotation Rotation { get; set; }
+	public float FieldOfView { get; set; }
+
 	protected Angles OrbitAngles;
 
 	public static float OrbitDistance { get; set; } = 400f;
@@ -42,7 +47,7 @@ public partial class PlayerCamera : CameraMode
 		}
 	}
 
-	public override void Update()
+	public void Update()
 	{
 		var pawn = TargetEntity;
 		if ( !pawn.IsValid() )
@@ -73,8 +78,10 @@ public partial class PlayerCamera : CameraMode
 
 		FieldOfView = 70f;
 
-		ZFar = ZFarPreference;
-		Viewer = null;
+		Camera.Position = Position;
+		Camera.Rotation = Rotation;
+		Camera.ZFar = ZFarPreference;
+		Camera.FirstPersonViewer = null;
 	}
 
 	protected static PlayerCharacter Player => Local.Pawn as PlayerCharacter;
@@ -103,7 +110,7 @@ public partial class PlayerCamera : CameraMode
 
 	public bool IsSpectator => Local.Pawn != TargetEntity;
 
-	public override void BuildInput()
+	public void BuildInput()
 	{
 		var pawn = TargetEntity;
 
@@ -145,7 +152,7 @@ public partial class PlayerCamera : CameraMode
 
 		Sound.Listener = new()
 		{
-			Position = pawn.IsValid() ? pawn.EyePosition : Position,
+			Position = pawn.IsValid() ? pawn.AimRay.Position : Position,
 			Rotation = Rotation
 		};
 	}
