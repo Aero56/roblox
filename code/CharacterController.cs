@@ -116,7 +116,7 @@ public partial class CharacterController : BasePlayerController
 		// RunLadderMode
 
 		CheckLadder();
-		Swimming = Pawn.WaterLevel > 0.6f;
+		Swimming = Pawn.GetWaterLevel() > 0.6f;
 
 		//
 		// Start Gravity

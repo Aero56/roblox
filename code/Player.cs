@@ -74,7 +74,7 @@ public partial class PlayerCharacter : Player
 
 		PlaySound( "oof" );
 
-		BecomeRagdollOnClient( Velocity, lastDamage.Flags, lastDamage.Position, lastDamage.Force, lastDamage.BoneIndex );
+		BecomeRagdollOnClient( Velocity, lastDamage.Position, lastDamage.Force, lastDamage.BoneIndex, lastDamage.HasTag( "bullet" ), lastDamage.HasTag( "blast" ) );
 
 		Controller = null;
 
@@ -174,7 +174,7 @@ public partial class PlayerCharacter : Player
 		animHelper.IsGrounded = GroundEntity != null;
 		animHelper.IsSitting = controller.HasTag( "sitting" );
 		animHelper.IsClimbing = controller.HasTag( "climbing" );
-		animHelper.IsSwimming = WaterLevel >= 0.5f;
+		animHelper.IsSwimming = this.GetWaterLevel() >= 0.5f;
 		animHelper.IsWeaponLowered = false;
 
 		if ( controller.HasEvent( "jump" ) ) animHelper.TriggerJump();
