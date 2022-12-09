@@ -82,6 +82,7 @@ public partial class PlayerCamera
 		Camera.Rotation = Rotation;
 		Camera.ZFar = ZFarPreference;
 		Camera.FirstPersonViewer = null;
+		Camera.FieldOfView = Screen.CreateVerticalFieldOfView( FieldOfView );
 	}
 
 	protected static PlayerCharacter Player => Local.Pawn as PlayerCharacter;

@@ -66,6 +66,10 @@ public partial class PlayerCharacter : Player
 
 		Controller?.BuildInput();
 
+		if ( Input.StopProcessing ) return;
+		
+		PlayerCamera?.BuildInput();
+
 	}
 
 	public override void OnKilled()

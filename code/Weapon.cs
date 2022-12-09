@@ -190,12 +190,10 @@ public partial class Weapon : BaseWeapon, IUse
 	public virtual void ShootBullets( int numBullets, float spread, float force, float damage, float bulletSize )
 	{
 		var ray = Owner.AimRay;
-		var pos = ray.Position;
-		var dir = ray.Forward;
 
 		for ( int i = 0; i < numBullets; i++ )
 		{
-			ShootBullet( pos, dir, spread, force / numBullets, damage, bulletSize );
+			ShootBullet( ray.Position, ray.Forward, spread, force / numBullets, damage, bulletSize );
 		}
 	}
 }
