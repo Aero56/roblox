@@ -105,13 +105,13 @@ public partial class PlayerCharacter : Player
 
 		base.TakeDamage( info );
 
-		if ( LifeState == LifeState.Dead && info.Attacker != null )
-		{
-			if ( info.Attacker.Client != null && info.Attacker != this )
-			{
-				Game.Current.SubmitScore( "Kills", info.Attacker.Client, info.Attacker.Client.GetInt( "kills" ) );
-			}
-		}
+		// if ( LifeState == LifeState.Dead && info.Attacker != null )
+		// {
+		// 	if ( info.Attacker.Client != null && info.Attacker != this )
+		// 	{
+		// 		Game.Current.SubmitScore( "Kills", info.Attacker.Client, info.Attacker.Client.GetInt( "kills" ) );
+		// 	}
+		// }
 	}
 
 	public override PawnController GetActiveController()

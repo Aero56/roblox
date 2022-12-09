@@ -43,10 +43,10 @@ partial class SbuxShooter : Weapon
 				Shoot();
 			}
 
-			if ( Input.Released( InputButton.PrimaryAttack ) || Input.Released( InputButton.SecondaryAttack ) )
-			{
-				UpdateLeaderboard( cl );
-			}
+			// if ( Input.Released( InputButton.PrimaryAttack ) || Input.Released( InputButton.SecondaryAttack ) )
+			// {
+			// 	UpdateLeaderboard( cl );
+			// }
 		}
 	}
 

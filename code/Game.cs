@@ -165,10 +165,10 @@ public partial class Game : GameManager
 		}
 	}
 
-	public virtual async Task<Sandbox.LeaderboardEntry?> GetScore( string bucket, Client client )
+	public virtual async Task<Sandbox.LeaderboardEntry?> GetScore( string name, Client client )
 	{
 
-		var leaderboard = await Leaderboard.FindOrCreate( bucket, false );
+		var leaderboard = await Leaderboard.FindOrCreate( name, false );
 
 		return await leaderboard.Value.GetScore( client.SteamId );
 

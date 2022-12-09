@@ -10,7 +10,6 @@
   "ResourcePaths": null,
   "HasCode": true,
   "CodePath": "/code/",
-  "RootNamespace": "Roblox",
   "Metadata": {
     "MaxPlayers": 128,
     "MinPlayers": 0,
