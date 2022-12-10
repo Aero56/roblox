@@ -6,7 +6,7 @@ public partial class Carriable : BaseCarriable, IUse
 	{
 		if ( PlayerCamera.IsFirstPerson )
 		{
-			Host.AssertClient();
+			Game.AssertClient();
 
 			if ( string.IsNullOrEmpty( ViewModelPath ) )
 				return;

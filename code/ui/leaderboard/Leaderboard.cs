@@ -4,7 +4,7 @@
 	public partial class Leaderboard<T> : Panel where T : LeaderboardEntry, new()
 	{
 		public Panel Canvas { get; protected set; }
-		readonly Dictionary<Client, T> Rows = new();
+		readonly Dictionary<IClient, T> Rows = new();
 
 		public Panel Header { get; protected set; }
 		public static bool IsOpen { get; set; } = true;
@@ -33,13 +33,13 @@
 			//
 			// Clients that were added
 			//
-			foreach ( var client in Client.All.Except( Rows.Keys ) )
+			foreach ( var client in Game.Clients.Except( Rows.Keys ) )
 			{
 				var entry = AddClient( client );
 				Rows[client] = entry;
 			}
 
-			foreach ( var client in Rows.Keys.Except( Client.All ) )
+			foreach ( var client in Rows.Keys.Except( Game.Clients ) )
 			{
 				if ( Rows.TryGetValue( client, out var row ) )
 				{
@@ -58,7 +58,7 @@
 			Header.Add.Label( "S&bux", "sbux" );
 		}
 
-		protected virtual T AddClient( Client entry )
+		protected virtual T AddClient( IClient entry )
 		{
 			var p = Canvas.AddChild<T>();
 			p.Client = entry;

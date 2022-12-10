@@ -28,7 +28,7 @@ public partial class PlayerCharacter : Player
 	/// <summary>
 	/// Initialize using this client
 	/// </summary>
-	public PlayerCharacter( Client cl ) : this()
+	public PlayerCharacter( IClient cl ) : this()
 	{
 		// Load clothing from client data
 		Clothing.LoadFromClient( cl );
@@ -104,14 +104,6 @@ public partial class PlayerCharacter : Player
 		lastDamage = info;
 
 		base.TakeDamage( info );
-
-		if ( LifeState == LifeState.Dead && info.Attacker != null )
-		{
-			if ( info.Attacker.Client != null && info.Attacker != this )
-			{
-				await Roblox.Game.SubmitScore( "Kills", info.Attacker.Client, info.Attacker.Client.GetInt( "kills" ) );
-			}
-		}
 	}
 
 	public override PawnController GetActiveController()
@@ -121,14 +113,14 @@ public partial class PlayerCharacter : Player
 		return base.GetActiveController();
 	}
 
-	public override void FrameSimulate( Client cl )
+	public override void FrameSimulate( IClient cl )
 	{
 		base.FrameSimulate( cl );
 
 		PlayerCamera.Update();
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 

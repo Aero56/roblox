@@ -50,7 +50,7 @@ public partial class Weapon : BaseWeapon, IUse
 		StartReloadEffects();
 	}
 
-	public override void Simulate( Client owner )
+	public override void Simulate( IClient owner )
 	{
 		if ( TimeSinceDeployed < 0.6f )
 			return;
@@ -83,7 +83,7 @@ public partial class Weapon : BaseWeapon, IUse
 	{
 		if ( PlayerCamera.IsFirstPerson )
 		{
-			Host.AssertClient();
+			Game.AssertClient();
 
 			if ( string.IsNullOrEmpty( ViewModelPath ) )
 				return;
@@ -133,7 +133,7 @@ public partial class Weapon : BaseWeapon, IUse
 	[ClientRpc]
 	protected virtual void ShootEffects()
 	{
-		Host.AssertClient();
+		Game.AssertClient();
 
 		Particles.Create( "particles/pistol_muzzleflash.vpcf", EffectEntity, "muzzle" );
 

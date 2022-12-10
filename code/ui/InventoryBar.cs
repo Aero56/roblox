@@ -19,7 +19,7 @@ public class InventoryBar : Panel
 	{
 		base.Tick();
 
-		if ( Local.Pawn is Player player == false ) return;
+		if ( Game.LocalPawn is Player player == false ) return;
 		if ( player == null ) return;
 		if ( player.Inventory == null ) return;
 
@@ -31,7 +31,7 @@ public class InventoryBar : Panel
 
 	private static void UpdateIcon( Entity ent, InventoryIcon inventoryIcon, int i )
 	{
-		var player = Local.Pawn as Player;
+		var player = Game.LocalPawn as Player;
 
 		if ( ent == null )
 		{
@@ -50,7 +50,7 @@ public class InventoryBar : Panel
 	[Event( "buildinput" )]
 	public static void ProcessClientInput()
 	{
-		if ( Local.Pawn is Player player == false ) return;
+		if ( Game.LocalPawn is Player player == false ) return;
 		if ( player == null )
 			return;
 
@@ -74,7 +74,7 @@ public class InventoryBar : Panel
 
 	public static void SetActiveSlot( IBaseInventory inventory, int i )
 	{
-		if ( Local.Pawn is not Player player )
+		if ( Game.LocalPawn is not Player player )
 			return;
 
 		var ent = inventory.GetSlot( i );

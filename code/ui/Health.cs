@@ -12,7 +12,7 @@ public class Health : Panel
 
 	public override void Tick()
 	{
-		var player = Local.Pawn;
+		var player = Game.LocalPawn;
 		if ( player == null ) return;
 
 		LerpedHealthFraction = LerpedHealthFraction.LerpTo( player.Health / 100, Time.Delta * 10f );

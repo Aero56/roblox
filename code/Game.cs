@@ -23,7 +23,7 @@ public partial class Roblox : GameManager
 		}
 	}
 
-	public override void ClientJoined( Client cl )
+	public override void ClientJoined( IClient cl )
 	{
 		var player = new PlayerCharacter( cl );
 		player.Respawn();
@@ -33,7 +33,7 @@ public partial class Roblox : GameManager
 		cl.Pawn = player;
 	}
 
-	public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
+	public override void ClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
 	{
 		if ( cl.Pawn.IsValid() )
 		{
@@ -144,38 +144,4 @@ public partial class Roblox : GameManager
 
 		//Log.Info( $"ent: {ent}" );
 	}
-
-	public override void DoPlayerNoclip( Client player )
-	{
-	}
-
-	[ConCmd.Admin( "respawn_entities" )]
-	public static void RespawnEntities()
-	{
-		Map.Reset( DefaultCleanupFilter );
-	}
-
-	public virtual async Task<LeaderboardUpdate?> SubmitScore( string name, Client client, int score )
-	{
-		Host.AssertServer();
-
-		var leaderboard = await Leaderboard.FindOrCreate( name, false );
-
-		if ( Current == null || !leaderboard.Value.CanSubmit )
-		{
-			return null;
-		}
-
-		return await leaderboard.Value.Submit( client, score );
-	}
-
-	public virtual async Task<Sandbox.LeaderboardEntry?> GetScore( string name, Client client )
-	{
-
-		var leaderboard = await Leaderboard.FindOrCreate( name, false );
-
-		return await leaderboard.Value.GetScore( client.SteamId );
-
-	}
-
 }

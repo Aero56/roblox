@@ -85,11 +85,11 @@ public partial class PlayerCamera
 		Camera.FieldOfView = Screen.CreateVerticalFieldOfView( FieldOfView );
 	}
 
-	protected static PlayerCharacter Player => Local.Pawn as PlayerCharacter;
+	protected static PlayerCharacter Player => Game.LocalPawn as PlayerCharacter;
 
 	private static AnimatedEntity FindTargetEntity()
 	{
-		var localPawn = Local.Pawn;
+		var localPawn = Game.LocalPawn;
 
 		if ( localPawn is Player character )
 		{
@@ -97,7 +97,7 @@ public partial class PlayerCamera
 		}
 		else
 		{
-			var target = Client.All.Select( x => x.Pawn as Player )
+			var target = Game.Clients.Select( x => x.Pawn as Player )
 				.FirstOrDefault();
 
 			if ( target.IsValid() )
@@ -109,7 +109,7 @@ public partial class PlayerCamera
 		return null;
 	}
 
-	public bool IsSpectator => Local.Pawn != TargetEntity;
+	public bool IsSpectator => Game.LocalPawn != TargetEntity;
 
 	public void BuildInput()
 	{

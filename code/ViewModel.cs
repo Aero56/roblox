@@ -22,7 +22,7 @@ public class ViewModel : BaseViewModel
 
 	public override void PlaceViewmodel()
 	{
-		if ( !Local.Pawn.IsValid() )
+		if ( !Game.LocalPawn.IsValid() )
 			return;
 
 		var inPos = Camera.Position;
@@ -56,7 +56,7 @@ public class ViewModel : BaseViewModel
 
 		if ( EnableSwingAndBob )
 		{
-			var playerVelocity = Local.Pawn.Velocity;
+			var playerVelocity = Game.LocalPawn.Velocity;
 			var verticalDelta = playerVelocity.z * Time.Delta;
 			var viewDown = Rotation.FromPitch( newPitch ).Up * -1.0f;
 			verticalDelta *= 1.0f - MathF.Abs( viewDown.Cross( Vector3.Down ).y );

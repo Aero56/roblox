@@ -16,9 +16,9 @@ partial class SbuxShooter : Weapon
 		SetModel( "weapons/rust_pistol/rust_pistol.vmdl" );
 	}
 
-	public override async void Simulate( Client cl )
+	public override async void Simulate( IClient cl )
 	{
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 		{
 			if ( Input.Pressed( InputButton.Reload ) )
 			{
@@ -41,12 +41,6 @@ partial class SbuxShooter : Weapon
 			{
 				timeSinceShoot = 0;
 				Shoot();
-			}
-
-			if ( Input.Released( InputButton.PrimaryAttack ) || Input.Released( InputButton.SecondaryAttack ) )
-			{
-				var sbuxCount = cl.GetInt( "sbux" );
-				await Roblox.Game.SubmitScore( "Sandbux", cl, sbuxCount );
 			}
 		}
 	}

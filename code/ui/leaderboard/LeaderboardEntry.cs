@@ -3,7 +3,7 @@
 {
 	public partial class LeaderboardEntry : Panel
 	{
-		public Client Client;
+		public IClient Client;
 
 		public Label PlayerName;
 		public Label Kills;
@@ -42,10 +42,10 @@
 			PlayerName.Text = Client.Name;
 			Kills.Text = Client.GetInt( "kills" ).ToString();
 			Sbux.Text = Client.GetInt( "sbux" ).ToString();
-			SetClass( "me", Client == Local.Client );
+			SetClass( "me", Client == Game.LocalClient );
 		}
 
-		public virtual void UpdateFrom( Client client )
+		public virtual void UpdateFrom( IClient client )
 		{
 			Client = client;
 			UpdateData();
