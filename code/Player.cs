@@ -94,7 +94,7 @@ public partial class PlayerCharacter : Player
 		Inventory.DeleteContents();
 	}
 
-	public override void TakeDamage( DamageInfo info )
+	public override async void TakeDamage( DamageInfo info )
 	{
 		if ( info.Hitbox.HasTag( "head" ) )
 		{
@@ -105,13 +105,13 @@ public partial class PlayerCharacter : Player
 
 		base.TakeDamage( info );
 
-		// if ( LifeState == LifeState.Dead && info.Attacker != null )
-		// {
-		// 	if ( info.Attacker.Client != null && info.Attacker != this )
-		// 	{
-		// 		Game.Current.SubmitScore( "Kills", info.Attacker.Client, info.Attacker.Client.GetInt( "kills" ) );
-		// 	}
-		// }
+		if ( LifeState == LifeState.Dead && info.Attacker != null )
+		{
+			if ( info.Attacker.Client != null && info.Attacker != this )
+			{
+				await Roblox.Game.SubmitScore( "Kills", info.Attacker.Client, info.Attacker.Client.GetInt( "kills" ) );
+			}
+		}
 	}
 
 	public override PawnController GetActiveController()

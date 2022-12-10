@@ -16,7 +16,7 @@ partial class SbuxShooter : Weapon
 		SetModel( "weapons/rust_pistol/rust_pistol.vmdl" );
 	}
 
-	public override void Simulate( Client cl )
+	public override async void Simulate( Client cl )
 	{
 		if ( Host.IsServer )
 		{
@@ -43,10 +43,11 @@ partial class SbuxShooter : Weapon
 				Shoot();
 			}
 
-			// if ( Input.Released( InputButton.PrimaryAttack ) || Input.Released( InputButton.SecondaryAttack ) )
-			// {
-			// 	UpdateLeaderboard( cl );
-			// }
+			if ( Input.Released( InputButton.PrimaryAttack ) || Input.Released( InputButton.SecondaryAttack ) )
+			{
+				var sbuxCount = cl.GetInt( "sbux" );
+				await Roblox.Game.SubmitScore( "Sandbux", cl, sbuxCount );
+			}
 		}
 	}
 
@@ -64,12 +65,5 @@ partial class SbuxShooter : Weapon
 		ent.Velocity = ray.Forward * new Random().Next( 500, 1000 );
 
 		Client?.AddInt( "sbux", 1 );
-	}
-
-	public static void UpdateLeaderboard( Client cl )
-	{
-		var sbuxCount = cl.GetInt( "sbux" );
-		Game.Current.SubmitScore( "Sandbux", cl, sbuxCount );
-
 	}
 }

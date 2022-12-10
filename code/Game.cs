@@ -10,11 +10,11 @@ using Roblox.UI;
 
 namespace Roblox;
 
-public partial class Game : GameManager
+public partial class Roblox : GameManager
 {
-	public static new Game Current => Current as Game;
+	public static Roblox Game => Current as Roblox;
 
-	public Game()
+	public Roblox()
 	{
 		if ( IsServer )
 		{
@@ -155,14 +155,18 @@ public partial class Game : GameManager
 		Map.Reset( DefaultCleanupFilter );
 	}
 
-	public virtual async void SubmitScore( string bucket, Client client, int score )
+	public virtual async Task<LeaderboardUpdate?> SubmitScore( string name, Client client, int score )
 	{
+		Host.AssertServer();
 
-		var leaderboard = await Leaderboard.FindOrCreate( bucket, false );
+		var leaderboard = await Leaderboard.FindOrCreate( name, false );
 
-		if( leaderboard != null & leaderboard.Value.CanSubmit ) {
-			await leaderboard.Value.Submit( client, score );
+		if ( Current == null || !leaderboard.Value.CanSubmit )
+		{
+			return null;
 		}
+
+		return await leaderboard.Value.Submit( client, score );
 	}
 
 	public virtual async Task<Sandbox.LeaderboardEntry?> GetScore( string name, Client client )
