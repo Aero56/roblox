@@ -7,7 +7,7 @@ public partial class SandbloxHud : HudEntity<RootPanel>
 {
 	public SandbloxHud()
 	{
-		if ( !IsClient )
+		if ( !Game.IsClient )
 			return;
 
 		RootPanel.StyleSheet.Load( "/ui/SandbloxHud.scss" );

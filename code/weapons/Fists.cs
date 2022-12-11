@@ -80,7 +80,7 @@ partial class Fists : Weapon
 
 			hit = true;
 
-			if ( !IsServer ) continue;
+			if ( !Game.IsServer ) continue;
 
 			using ( Prediction.Off() )
 			{

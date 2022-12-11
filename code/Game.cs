@@ -16,7 +16,7 @@ public partial class Roblox : GameManager
 
 	public Roblox()
 	{
-		if ( IsServer )
+		if ( Sandbox.Game.IsServer )
 		{
 			// Create the HUD
 			_ = new SandbloxHud();
