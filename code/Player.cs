@@ -94,7 +94,7 @@ public partial class PlayerCharacter : Player
 		Inventory.DeleteContents();
 	}
 
-	public override async void TakeDamage( DamageInfo info )
+	public override void TakeDamage( DamageInfo info )
 	{
 		if ( info.Hitbox.HasTag( "head" ) )
 		{

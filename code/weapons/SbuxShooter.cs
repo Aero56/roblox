@@ -16,7 +16,7 @@ partial class SbuxShooter : Weapon
 		SetModel( "weapons/rust_pistol/rust_pistol.vmdl" );
 	}
 
-	public override async void Simulate( IClient cl )
+	public override void Simulate( IClient cl )
 	{
 		if ( Game.IsServer )
 		{
